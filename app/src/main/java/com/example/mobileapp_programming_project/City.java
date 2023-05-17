@@ -3,28 +3,26 @@ package com.example.mobileapp_programming_project;
 public class City {
 
     private String name;
-    private String region;
-    private String population;
+    private String attractions;
+    private int population;
     private String wikiLink;
-    private String img;
 
-    public City(String name, String region, String population, String wikiLink, String img) {
+    public City(String name, String region, int population, String wikiLink, String img) {
         this.name = name;
-        this.region = region;
+        this.attractions = attractions;
         this.population = population;
         this.wikiLink = wikiLink;
-        this.img = img;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAttractions() {
+        return attractions;
     }
 
-    public String getPopulation() {
+    public int getPopulation() {
         return population;
     }
 
@@ -32,7 +30,4 @@ public class City {
         return wikiLink;
     }
 
-    public String getImg() {
-        return img;
-    }
 }

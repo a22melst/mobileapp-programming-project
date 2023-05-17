@@ -57,4 +57,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface OnClickListener {
         void onClick(City item);
     }
+
+    public void setItems(List<City> items) {
+        this.items = items;
+    }
 }
