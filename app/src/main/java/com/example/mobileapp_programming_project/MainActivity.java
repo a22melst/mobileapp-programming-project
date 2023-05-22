@@ -7,26 +7,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+
 
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=a22melst";
     private RecyclerViewAdapter adapter;
     private Gson gson = new Gson();
-    private ArrayList<City> cities = new ArrayList<>(Arrays.asList(
-        new City("hej", "hej", 1, "hej", "hej"),
-        new City("a", "b", 2, "d", "e")
-    ));
-
+    private ArrayList<City> cities = new ArrayList<>();
 
 
     @Override

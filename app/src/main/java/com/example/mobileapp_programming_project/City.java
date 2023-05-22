@@ -1,16 +1,21 @@
 package com.example.mobileapp_programming_project;
 
+import com.google.gson.annotations.SerializedName;
+
 public class City {
 
     private String name;
-    private String attractions;
-    private int population;
+    @SerializedName("auxdata")
+    private String imgLink;
+    @SerializedName("company")
+    private String population;
+    @SerializedName("location")
     private String wikiLink;
 
-    public City(String name, String region, int population, String wikiLink, String img) {
+    public City(String name, String region, String population, String wikiLink, String imgLink) {
         this.name = name;
-        this.attractions = attractions;
         this.population = population;
+        this.imgLink = imgLink;
         this.wikiLink = wikiLink;
     }
 
@@ -18,11 +23,11 @@ public class City {
         return name;
     }
 
-    public String getAttractions() {
-        return attractions;
+    public String getImgLink() {
+        return imgLink;
     }
 
-    public int getPopulation() {
+    public String getPopulation() {
         return population;
     }
 
