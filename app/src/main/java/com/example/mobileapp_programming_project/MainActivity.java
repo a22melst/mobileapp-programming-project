@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private RecyclerViewAdapter adapter;
     private Gson gson = new Gson();
     private ArrayList<City> cities = new ArrayList<>();
+    private Button aboutbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,13 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
         Toolbar custombar = findViewById(R.id.custombar);
         setSupportActionBar(custombar);
-
+        aboutbtn = findViewById(R.id.aboutbtn);
+        aboutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAboutPage();
+            }
+        });
         adapter = new RecyclerViewAdapter(this, cities, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(City city) {
@@ -65,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         intent.putExtra("Country", city.getCountry());
         intent.putExtra("Population", city.getPopulation());
         intent.putExtra("WikiURL", city.getWikiURL());
+        startActivity(intent);
+    }
+
+    public void openAboutPage() {
+        Intent intent = new Intent(this, AboutPage.class);
         startActivity(intent);
     }
 }
