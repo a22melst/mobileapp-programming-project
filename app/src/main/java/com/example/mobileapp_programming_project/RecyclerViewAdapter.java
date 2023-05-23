@@ -17,6 +17,9 @@ import com.squareup.picasso.Picasso;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<City> items;
+
+    private boolean showImages = true;
+    private boolean showCityNames = true;
     private LayoutInflater layoutInflater;
     private OnClickListener onClickListener;
 
@@ -36,6 +39,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Picasso.get().load(items.get(position).getImgURL()).fit().into(holder.img);
         holder.cityName.setText(items.get(position).getName());
+
+        if (showImages) {
+            holder.img.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.img.setVisibility(View.GONE);
+        }
+
+        if (showCityNames) {
+            holder.cityName.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.cityName.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -58,6 +76,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view) {
             onClickListener.onClick(items.get(getBindingAdapterPosition()));
         }
+
     }
 
     public interface OnClickListener {
@@ -66,5 +85,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void setItems(List<City> items) {
         this.items = items;
+    }
+
+    public void toggleHideImages() {
+        this.showImages = !showImages;
+    }
+
+    public void toggleHideCityNames() {
+        this.showCityNames = !showCityNames;
     }
 }

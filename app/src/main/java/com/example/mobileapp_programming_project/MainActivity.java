@@ -1,16 +1,16 @@
 package com.example.mobileapp_programming_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 
 import com.google.gson.Gson;
@@ -26,22 +26,12 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private RecyclerViewAdapter adapter;
     private Gson gson = new Gson();
     private ArrayList<City> cities = new ArrayList<>();
-    private Button aboutbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar custombar = findViewById(R.id.custombar);
-        setSupportActionBar(custombar);
-        aboutbtn = findViewById(R.id.aboutbtn);
-        aboutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openAboutPage();
-            }
-        });
         adapter = new RecyclerViewAdapter(this, cities, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(City city) {
@@ -67,6 +57,33 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                openAboutPage();
+                return true;
+            case R.id.toggleImages:Images:
+                adapter.toggleHideImages();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.toggleCityNames:
+                adapter.toggleHideCityNames();
+                adapter.notifyDataSetChanged();
+                return true;
+            default: return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
     public void openDetailView(City city) {
         Intent intent = new Intent(this, DetailView.class);
         intent.putExtra("ImgURL", city.getImgURL());
@@ -81,4 +98,5 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Intent intent = new Intent(this, AboutPage.class);
         startActivity(intent);
     }
+
 }
