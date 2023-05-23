@@ -5,20 +5,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private RecyclerViewAdapter adapter;
     private Gson gson = new Gson();
     private ArrayList<City> cities = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +35,9 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
         adapter = new RecyclerViewAdapter(this, cities, new RecyclerViewAdapter.OnClickListener() {
             @Override
-            public void onClick(City item) {
-                Toast.makeText(MainActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
+            public void onClick(City city) {
+                Toast.makeText(MainActivity.this, city.getName(), Toast.LENGTH_SHORT).show();
+                openDetailView(city);
             }
         });
 
@@ -60,5 +57,15 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         adapter.setItems(cities);
         adapter.notifyDataSetChanged();
 
+    }
+
+    public void openDetailView(City city) {
+        Intent intent = new Intent(this, DetailView.class);
+        intent.putExtra("ImgURL", city.getImgURL());
+        intent.putExtra("CityName", city.getName());
+        intent.putExtra("Population", city.getPopulation());
+        intent.putExtra("Wiki", city.getWikiURL());
+        intent.putExtra("Country", city.getCountry());
+        startActivity(intent);
     }
 }

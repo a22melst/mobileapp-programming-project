@@ -6,33 +6,40 @@ public class City {
 
     private String name;
     @SerializedName("auxdata")
-    private String imgLink;
+    private String imgURL;
     @SerializedName("company")
     private String population;
     @SerializedName("location")
-    private String wikiLink;
+    private String wikiURL;
 
-    public City(String name, String region, String population, String wikiLink, String imgLink) {
+    @SerializedName("category")
+    private String country;
+
+    public City(String name, String region, String population, String wikiURL, String imgURL) {
         this.name = name;
         this.population = population;
-        this.imgLink = imgLink;
-        this.wikiLink = wikiLink;
+        this.imgURL = getImgURL();
+        this.wikiURL = wikiURL;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getImgLink() {
-        return imgLink;
+    public String getImgURL() {
+        return imgURL;
     }
 
     public String getPopulation() {
         return population;
     }
 
-    public String getWikiLink() {
-        return wikiLink;
+    public String getWikiURL() {
+        return wikiURL;
+    }
+
+    public String getCountry() {
+        return country;
     }
 
 }

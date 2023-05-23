@@ -34,8 +34,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(items.get(position).getName());
-        Picasso.get().load(items.get(position).getImgLink()).fit().into(holder.img);
+        Picasso.get().load(items.get(position).getImgURL()).fit().into(holder.img);
+        holder.cityName.setText(items.get(position).getName());
     }
 
     @Override
@@ -44,14 +44,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView title;
         ImageView img;
+        TextView cityName;
 
         ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            title = itemView.findViewById(R.id.title);
             img = itemView.findViewById(R.id.imageView1);
+            cityName = itemView.findViewById(R.id.cityName);
         }
 
         @Override
