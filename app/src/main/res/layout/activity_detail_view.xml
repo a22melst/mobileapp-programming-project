@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     tools:context=".DetailView">
 
   <ImageView
@@ -12,33 +13,55 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="50dp"
-      android:layout_marginBottom="8dp"
+      android:layout_marginTop="35dp"
+      android:layout_marginHorizontal="35dp"
+
       android:contentDescription="City image"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/cityName"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/cityName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="City"
+      android:textSize="34sp"
+      app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageViewDetail" />
 
   <LinearLayout
       android:id="@+id/linearLayout"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="124dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginHorizontal="40dp"
+      android:layout_marginTop="164dp"
       android:orientation="vertical"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageViewDetail">
 
     <TextView
-        android:id="@+id/cityName"
-        android:layout_width="wrap_content"
+        android:id="@+id/country"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="353dp"
-        android:text="TextView" />
+        android:text="Country" />
+
+    <TextView
+        android:id="@+id/population"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Population" />
+
+    <TextView
+        android:id="@+id/wikiURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WikiURL" />
 
   </LinearLayout>
 

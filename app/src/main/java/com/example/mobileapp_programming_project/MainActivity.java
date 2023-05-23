@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         adapter = new RecyclerViewAdapter(this, cities, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(City city) {
-                Toast.makeText(MainActivity.this, city.getName(), Toast.LENGTH_SHORT).show();
                 openDetailView(city);
             }
         });
@@ -63,9 +62,9 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Intent intent = new Intent(this, DetailView.class);
         intent.putExtra("ImgURL", city.getImgURL());
         intent.putExtra("CityName", city.getName());
-        intent.putExtra("Population", city.getPopulation());
-        intent.putExtra("Wiki", city.getWikiURL());
         intent.putExtra("Country", city.getCountry());
+        intent.putExtra("Population", city.getPopulation());
+        intent.putExtra("WikiURL", city.getWikiURL());
         startActivity(intent);
     }
 }

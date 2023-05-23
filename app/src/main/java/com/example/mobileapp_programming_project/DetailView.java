@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso;
 public class DetailView extends AppCompatActivity {
 
     private ImageView img;
-    private TextView cityNameView;
+    private TextView cityNameView, countryView, populationView, wikiURLView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +19,24 @@ public class DetailView extends AppCompatActivity {
 
         img = findViewById(R.id.imageViewDetail);
         cityNameView = findViewById(R.id.cityName);
+        countryView = findViewById(R.id.country);
+        populationView = findViewById(R.id.population);
+        wikiURLView = findViewById(R.id.wikiURL);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String imgURL = extras.getString("ImgURL");
             String cityName = extras.getString("CityName");
+            String country = extras.getString("Country");
             String population = extras.getString("Population");
-            String wiki = extras.getString("WikiURL");
+            String wikiURL = extras.getString("WikiURL");
 
             Picasso.get().load(imgURL).into(img);
             cityNameView.setText(cityName);
+            countryView.setText("Country: " + country);
+            populationView.setText("Population: " + population);
+            wikiURLView.setText("Wikipedia: " + wikiURL);
+
         }
     }
 }
