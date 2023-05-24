@@ -1,11 +1,14 @@
 package com.example.mobileapp_programming_project;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=a22melst";
     private RecyclerViewAdapter adapter;
+    private SharedPreferences prefShowImages, prefShowCityNames;
+    private SharedPreferences.Editor prefEditorImg, prefEditorCity;
     private Gson gson = new Gson();
     private ArrayList<City> cities = new ArrayList<>();
 
@@ -35,12 +40,20 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefShowImages = getPreferences(MODE_PRIVATE);
+        prefShowCityNames = getPreferences(MODE_PRIVATE);
+        prefEditorImg = prefShowImages.edit();
+        prefEditorCity = prefShowCityNames.edit();
+
+        boolean showImages = prefShowImages.getBoolean("Images", true);
+        boolean showCityNames = prefShowCityNames.getBoolean("CityNames", true);
+
         adapter = new RecyclerViewAdapter(this, cities, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(City city) {
                 openDetailView(city);
             }
-        });
+        },showImages, showCityNames);
 
         RecyclerView view = findViewById(R.id.recycler_view);
         view.setLayoutManager(new LinearLayoutManager(this));
@@ -76,12 +89,17 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
             case R.id.toggleImages:
                 adapter.toggleHideImages();
                 adapter.notifyDataSetChanged();
+                prefEditorImg.putBoolean("Images", adapter.getShowImages());
+                prefEditorImg.apply();
                 return true;
             case R.id.toggleCityNames:
                 adapter.toggleHideCityNames();
                 adapter.notifyDataSetChanged();
+                prefEditorCity.putBoolean("CityNames", adapter.getShowCityNames());
+                prefEditorCity.apply();
                 return true;
             default: return super.onOptionsItemSelected(item);
+
         }
 
 

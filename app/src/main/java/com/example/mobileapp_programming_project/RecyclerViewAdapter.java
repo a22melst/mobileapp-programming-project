@@ -1,6 +1,9 @@
 package com.example.mobileapp_programming_project;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +21,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<City> items;
 
-    private boolean showImages = true;
-    private boolean showCityNames = true;
+    private boolean showImages;
+    private boolean showCityNames;
+
     private LayoutInflater layoutInflater;
     private OnClickListener onClickListener;
 
-    RecyclerViewAdapter(Context context, List<City> items, OnClickListener onClickListener) {
+    RecyclerViewAdapter(Context context, List<City> items, OnClickListener onClickListener, boolean showImages, boolean showCityNames) {
         this.layoutInflater = LayoutInflater.from(context);
         this.items = items;
         this.onClickListener = onClickListener;
+        this.showImages = showImages;
+        this.showCityNames = showCityNames;
     }
 
     @Override
@@ -88,10 +94,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void toggleHideImages() {
-        this.showImages = !showImages;
+        showImages = !showImages;
+    }
+    public void toggleHideCityNames() {
+        showCityNames = !showCityNames;
     }
 
-    public void toggleHideCityNames() {
-        this.showCityNames = !showCityNames;
+    public boolean getShowImages() {
+        return showImages;
     }
+
+    public boolean getShowCityNames() {
+        return showCityNames;
+    }
+
 }
