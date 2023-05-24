@@ -1,7 +1,18 @@
 package com.example.mobileapp_programming_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,10 +44,34 @@ public class DetailView extends AppCompatActivity {
 
             Picasso.get().load(imgURL).into(img);
             cityNameView.setText(cityName);
-            countryView.setText("Country: " + country);
-            populationView.setText("Population: " + population);
-            wikiURLView.setText("Wikipedia: " + wikiURL);
+            countryView.setText(getString(R.string.country) + ": " + country);
+            populationView.setText(getString(R.string.population) + ": " + population);
+
+            SpannableString spannableString = new SpannableString(wikiURL);
+            ClickableSpan span = new ClickableSpan() {
+                @Override
+                public void onClick(@NonNull View widget) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(wikiURL));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                @Override
+                public void updateDrawState(@NonNull TextPaint ds) {
+                    ds.setColor(Color.BLUE);
+                    ds.setUnderlineText(true);
+                }
+            };
+
+            spannableString.setSpan(span, 0, wikiURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            wikiURLView.setText(spannableString);
+            wikiURLView.setMovementMethod(LinkMovementMethod.getInstance());
 
         }
+
+
+
+
+
+
     }
 }

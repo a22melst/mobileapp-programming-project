@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.google.gson.Gson;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
             case R.id.about:
                 openAboutPage();
                 return true;
-            case R.id.toggleImages:Images:
+            case R.id.toggleImages:
                 adapter.toggleHideImages();
                 adapter.notifyDataSetChanged();
                 return true;

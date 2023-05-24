@@ -3,4 +3,6 @@
     <string name="about">About</string>
     <string name="show_hide_images">Show/Hide Images</string>
     <string name="show_hide_city_names">Show/Hide City Names</string>
+    <string name="population">Population</string>
+    <string name="country">Country</string>
 </resources>
